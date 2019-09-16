@@ -2,18 +2,24 @@
 
 console.log('App.js is running!');
 
+var todoApp = {
+    title: 'To do App!',
+    subtitle: 'Your to do stuff!'
+};
+
 var template = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        'To-Do App '
+        todoApp.title,
+        ' '
     ),
     React.createElement(
         'p',
         null,
-        ' Testing some info'
+        todoApp.subtitle
     ),
     React.createElement(
         'ol',
@@ -31,6 +37,7 @@ var template = React.createElement(
     )
 ) //fixed error by placing <div> tags
 ; //cleaned up for easier to read with indentations
+
 
 var appRoot = document.getElementById('app');
 

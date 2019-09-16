@@ -1,15 +1,23 @@
 console.log('App.js is running!');
 
+
+var todoApp = {
+    title: 'To do App!',
+    subtitle: 'Your to do stuff!',
+};
+
 var template = ( 
     <div>
-        <h1>To-Do App </h1>
-        <p> Testing some info</p>
+        <h1>{todoApp.title} </h1>
+        <p>{todoApp.subtitle}</p>
         <ol>
             <li>Item one</li>
             <li>Item two</li>
         </ol>
     </div> //fixed error by placing <div> tags
 ); //cleaned up for easier to read with indentations
+
+
 
 var appRoot = document.getElementById('app');
 
