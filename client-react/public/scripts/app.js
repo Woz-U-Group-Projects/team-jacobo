@@ -1,13 +1,21 @@
 'use strict';
 
-console.log('App.js is running!'); //checking to see if working in console under development tools in chrome
-
+console.log('App.js is running!');
 
 var template = React.createElement(
-  'h1',
+  'div',
   null,
-  'To-Do App '
-);
+  React.createElement(
+    'h1',
+    null,
+    'To-Do App '
+  ),
+  React.createElement(
+    'p',
+    null,
+    ' Testing some info'
+  )
+); //fixed error by placing <div> tags
 var appRoot = document.getElementById('app');
 
 ReactDOM.render(template, appRoot);
