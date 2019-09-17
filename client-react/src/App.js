@@ -12,3 +12,15 @@ class Header extends React.Component {
     }
 }
 
+// create a class called Action for the button effects that extends React.Component 
+class Action extends React.Component {
+    render() {
+        return (
+            <div>
+                <button>Tell me what to do!</button>
+            </div>
+        );
+    }
+}
+
+//code not compiling
