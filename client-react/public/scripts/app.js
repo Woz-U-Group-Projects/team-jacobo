@@ -1,97 +1,42 @@
-'use strict';
+"use strict";
 
-console.log('App.js is running!');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var todoApp = {
-    title: 'To do App!',
-    subtitle: 'Your to do stuff!',
-    options: []
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-//set up onFormSubmit arrow function
-var onFormSubmit = function onFormSubmit(e) {
-    e.preventDefault();
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-    var option = e.target.elements.option.value; // points to the element that the event started on
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-    if (option) {
-        //reference this string
-        todoApp.options.push(option); //push to array 
-        e.target.elements.option.value = '';
-        render();
+// building randomizer app using React components 
+var Header = function (_React$Component) {
+    _inherits(Header, _React$Component);
+
+    function Header() {
+        _classCallCheck(this, Header);
+
+        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
     }
-};
 
-// create a Remove All button with onClick handler 
-// onclick -> wipe the array >rerenders     
-
-
-var onRemoveAll = function onRemoveAll() {
-    todoApp.options = []; //clears out all the items
-    render();
-};
-
-var appRoot = document.getElementById('app');
-
-//create a function, set it up to take zero arguments
-var render = function render() {
-    var template = React.createElement(
-        'div',
-        null,
-        React.createElement(
-            'h1',
-            null,
-            todoApp.title,
-            ' '
-        ),
-        todoApp.subtitle && React.createElement(
-            'p',
-            null,
-            todoApp.subtitle
-        ),
-        React.createElement(
-            'p',
-            null,
-            todoApp.options.length > 0 ? 'Sample Text' : 'None'
-        ),
-        React.createElement(
-            'p',
-            null,
-            todoApp.options.length
-        ),
-        React.createElement(
-            'button',
-            { onClick: onRemoveAll },
-            'Remove All'
-        ),
-        React.createElement(
-            'ol',
-            null,
-            React.createElement(
-                'li',
+    _createClass(Header, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
                 null,
-                'Item one'
-            ),
-            React.createElement(
-                'li',
-                null,
-                'Item two'
-            )
-        ),
-        React.createElement(
-            'form',
-            { onSubmit: onFormSubmit },
-            React.createElement('input', { type: 'text', name: 'option' }),
-            React.createElement(
-                'button',
-                null,
-                'Add Options'
-            )
-        )
-    ) //fixed error by placing <div> tags
-    ; //cleaned up for easier to read with indentations
+                React.createElement(
+                    "h1",
+                    null,
+                    "Make me decide"
+                ),
+                React.createElement(
+                    "h2",
+                    null,
+                    "Randomizer at your will"
+                )
+            );
+        }
+    }]);
 
-    ReactDOM.render(template, appRoot);
-};
-
-render();
+    return Header;
+}(React.Component);
