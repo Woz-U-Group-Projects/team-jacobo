@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -19,20 +19,20 @@ var Header = function (_React$Component) {
     }
 
     _createClass(Header, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
+                'div',
                 null,
                 React.createElement(
-                    "h1",
+                    'h1',
                     null,
-                    "Make me decide"
+                    'Make me decide'
                 ),
                 React.createElement(
-                    "h2",
+                    'h2',
                     null,
-                    "Randomizer at your will"
+                    'Randomizer at your will'
                 )
             );
         }
@@ -54,15 +54,15 @@ var Action = function (_React$Component2) {
     }
 
     _createClass(Action, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
+                'div',
                 null,
                 React.createElement(
-                    "button",
+                    'button',
                     null,
-                    "Tell me what to do!"
+                    'Tell me what to do!'
                 )
             );
         }
@@ -71,4 +71,20 @@ var Action = function (_React$Component2) {
     return Action;
 }(React.Component);
 
-//code not compiling
+// add Options -> Options components here
+
+// add AddOptions > AddOption component here
+
+
+//add another component named jsx to render HTML from Header and Action classes
+
+
+var jsx = React.createElement(
+    'div',
+    null,
+    React.createElement(Header, null),
+    React.createElement(Action, null)
+);
+
+// forgot to add ReactDOM
+ReactDOM.render(jsx, document.getElementById('app'));

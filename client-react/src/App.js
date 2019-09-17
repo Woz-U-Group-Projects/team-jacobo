@@ -23,4 +23,19 @@ class Action extends React.Component {
     }
 }
 
-//code not compiling
+// add Options -> Options components here
+
+// add AddOptions > AddOption component here
+
+
+
+//add another component named jsx to render HTML from Header and Action classes
+const jsx = (
+    <div>
+        <Header />
+        <Action />
+    </div>
+);
+
+// forgot to add ReactDOM
+ReactDOM.render(jsx, document.getElementById('app'));
