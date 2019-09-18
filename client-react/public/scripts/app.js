@@ -100,6 +100,29 @@ var Options = function (_React$Component3) {
 // add AddOptions > AddOption component here
 
 
+var AddOption = function (_React$Component4) {
+    _inherits(AddOption, _React$Component4);
+
+    function AddOption() {
+        _classCallCheck(this, AddOption);
+
+        return _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).apply(this, arguments));
+    }
+
+    _createClass(AddOption, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                'AddOptions component here'
+            );
+        }
+    }]);
+
+    return AddOption;
+}(React.Component);
+
 //add another component named jsx to render HTML from Header and Action classes
 
 
@@ -107,7 +130,9 @@ var jsx = React.createElement(
     'div',
     null,
     React.createElement(Header, null),
+    ' render header class here',
     React.createElement(Action, null),
+    ' render action class here',
     React.createElement(Options, null),
     ' render new Options class here'
 );

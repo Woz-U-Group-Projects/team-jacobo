@@ -35,14 +35,23 @@ class Options extends React.Component {
 }
 
 // add AddOptions > AddOption component here
+class AddOption extends React.Component {
+    render () {
+        return (
+            <div>
+                AddOptions component here
+            </div>
 
+        );
+    }
+}
 
 
 //add another component named jsx to render HTML from Header and Action classes
 const jsx = (
     <div>
-        <Header />
-        <Action />
+        <Header /> render header class here
+        <Action /> render action class here
         <Options /> render new Options class here 
     </div>
 );
