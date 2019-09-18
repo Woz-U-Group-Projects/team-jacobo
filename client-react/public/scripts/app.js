@@ -73,6 +73,30 @@ var Action = function (_React$Component2) {
 
 // add Options -> Options components here
 
+
+var Options = function (_React$Component3) {
+    _inherits(Options, _React$Component3);
+
+    function Options() {
+        _classCallCheck(this, Options);
+
+        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+    }
+
+    _createClass(Options, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                'Options component here'
+            );
+        }
+    }]);
+
+    return Options;
+}(React.Component);
+
 // add AddOptions > AddOption component here
 
 
@@ -83,7 +107,9 @@ var jsx = React.createElement(
     'div',
     null,
     React.createElement(Header, null),
-    React.createElement(Action, null)
+    React.createElement(Action, null),
+    React.createElement(Options, null),
+    ' render new Options class here'
 );
 
 // forgot to add ReactDOM
