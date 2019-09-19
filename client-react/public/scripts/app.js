@@ -8,9 +8,38 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+//move rendering from const jsx into decisionApp class, nesting Header, Action, Options and AddOptions
+var ChoiceApp = function (_React$Component) {
+    _inherits(ChoiceApp, _React$Component);
+
+    function ChoiceApp() {
+        _classCallCheck(this, ChoiceApp);
+
+        return _possibleConstructorReturn(this, (ChoiceApp.__proto__ || Object.getPrototypeOf(ChoiceApp)).apply(this, arguments));
+    }
+
+    _createClass(ChoiceApp, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(Header, null),
+                React.createElement(Action, null),
+                React.createElement(Options, null),
+                React.createElement(AddOption, null)
+            );
+        }
+    }]);
+
+    return ChoiceApp;
+}(React.Component);
+
 // building randomizer app using React components 
-var Header = function (_React$Component) {
-    _inherits(Header, _React$Component);
+
+
+var Header = function (_React$Component2) {
+    _inherits(Header, _React$Component2);
 
     function Header() {
         _classCallCheck(this, Header);
@@ -44,8 +73,8 @@ var Header = function (_React$Component) {
 // create a class called Action for the button effects that extends React.Component 
 
 
-var Action = function (_React$Component2) {
-    _inherits(Action, _React$Component2);
+var Action = function (_React$Component3) {
+    _inherits(Action, _React$Component3);
 
     function Action() {
         _classCallCheck(this, Action);
@@ -74,8 +103,8 @@ var Action = function (_React$Component2) {
 // add Options -> Options components here
 
 
-var Options = function (_React$Component3) {
-    _inherits(Options, _React$Component3);
+var Options = function (_React$Component4) {
+    _inherits(Options, _React$Component4);
 
     function Options() {
         _classCallCheck(this, Options);
@@ -100,8 +129,8 @@ var Options = function (_React$Component3) {
 // add AddOptions > AddOption component here
 
 
-var AddOption = function (_React$Component4) {
-    _inherits(AddOption, _React$Component4);
+var AddOption = function (_React$Component5) {
+    _inherits(AddOption, _React$Component5);
 
     function AddOption() {
         _classCallCheck(this, AddOption);
@@ -124,18 +153,19 @@ var AddOption = function (_React$Component4) {
 }(React.Component);
 
 //add another component named jsx to render HTML from Header and Action classes
-
-
-var jsx = React.createElement(
-    'div',
-    null,
-    React.createElement(Header, null),
-    ' render header class here',
-    React.createElement(Action, null),
-    ' render action class here',
-    React.createElement(Options, null),
-    ' render new Options class here'
+//disable 
+/*
+const jsx = (
+    <div>
+        <Header /> render header class here
+        <Action /> render action class here
+        <Options /> render new Options class here 
+    </div>
 );
+*/
 
 // forgot to add ReactDOM
-ReactDOM.render(jsx, document.getElementById('app'));
+//renders ChoiceApp
+
+
+ReactDOM.render(React.createElement(ChoiceApp, null), document.getElementById('app'));

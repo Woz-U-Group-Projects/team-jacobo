@@ -1,3 +1,19 @@
+//move rendering from const jsx into decisionApp class, nesting Header, Action, Options and AddOptions
+class ChoiceApp extends React.Component {
+    render () {
+        return (
+            <div>
+                <Header />
+                <Action />
+                <Options />
+                <AddOption />
+            </div>
+        );
+    }
+}
+
+
+
 // building randomizer app using React components 
 class Header extends React.Component {
     render() {
@@ -48,6 +64,8 @@ class AddOption extends React.Component {
 
 
 //add another component named jsx to render HTML from Header and Action classes
+//disable 
+/*
 const jsx = (
     <div>
         <Header /> render header class here
@@ -55,6 +73,10 @@ const jsx = (
         <Options /> render new Options class here 
     </div>
 );
+*/ 
+
 
 // forgot to add ReactDOM
-ReactDOM.render(jsx, document.getElementById('app'));
+//renders ChoiceApp
+ReactDOM.render(<ChoiceApp />, document.getElementById('app'));
+
