@@ -28,6 +28,9 @@ handlePick() {
 }
 // pass handlePick to Action and set up onClick
 // randomly pick an option and alert user
+// found a way to make child communicate with parent, props are usually 1 way street 
+// this was fixed by passing functions like handlePick and handleDeleteOptions down to the children
+// the children can then call those functions which allows to reverse data flow  
     render () {
        const title = 'Decides for You App';
        const subtitle = '!Randomizer at your will';
