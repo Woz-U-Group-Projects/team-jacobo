@@ -12,10 +12,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ChoiceApp = function (_React$Component) {
     _inherits(ChoiceApp, _React$Component);
 
-    function ChoiceApp() {
+    function ChoiceApp(props) {
         _classCallCheck(this, ChoiceApp);
 
-        return _possibleConstructorReturn(this, (ChoiceApp.__proto__ || Object.getPrototypeOf(ChoiceApp)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (ChoiceApp.__proto__ || Object.getPrototypeOf(ChoiceApp)).call(this, props));
+
+        _this.state = {
+            options: ['Thing One', 'Thing two', 'Thing three']
+        };
+        return _this;
     }
 
     _createClass(ChoiceApp, [{
@@ -23,7 +28,6 @@ var ChoiceApp = function (_React$Component) {
         value: function render() {
             var title = 'ChoiceApp';
             var subtitle = '!Randomizer at your will';
-            var options = ['Thing One', 'Thing two', 'thing four'];
 
             return React.createElement(
                 'div',
@@ -31,7 +35,7 @@ var ChoiceApp = function (_React$Component) {
                 React.createElement(Header, { title: title, subtitle: subtitle }),
                 ' ',
                 React.createElement(Action, null),
-                React.createElement(Options, { options: options }),
+                React.createElement(Options, { options: this.state.options }),
                 React.createElement(AddOption, null)
             );
         }
@@ -120,21 +124,28 @@ var Action = function (_React$Component3) {
 //add Remove All button
 //setup a handleRemoveAll > alert with message
 // setup onClick to fire the method 
+//integrate bind
+
 
 var Options = function (_React$Component4) {
     _inherits(Options, _React$Component4);
 
-    function Options() {
+    //define constructor for remove all bind
+    function Options(props) {
         _classCallCheck(this, Options);
 
-        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+        var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+
+        _this4.handleRemoveAll = _this4.handleRemoveAll.bind(_this4);
+        return _this4;
     }
 
     _createClass(Options, [{
         key: 'handleRemoveAll',
         value: function handleRemoveAll() {
             // set up event handler method 
-            alert('handleRemoveAll');
+            console.log(this.props.options);
+            // alert('handleRemoveAll');
         }
     }, {
         key: 'render',

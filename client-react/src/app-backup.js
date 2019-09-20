@@ -56,10 +56,16 @@ class Action extends React.Component {
 //add Remove All button
 //setup a handleRemoveAll > alert with message
 // setup onClick to fire the method 
-
+//integrate bind
 class Options extends React.Component {
+    //define constructor for remove all bind
+    constructor(props) {
+        super(props);
+        this.handleRemoveAll = this.handleRemoveAll.bind(this);
+    }
     handleRemoveAll() {  // set up event handler method 
-        alert('handleRemoveAll');
+        console.log(this.props.options);
+        // alert('handleRemoveAll');
     }
     render() {
         return (

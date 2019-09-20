@@ -1,15 +1,20 @@
 //move rendering from const jsx into decisionApp class, nesting Header, Action, Options and AddOptions
 class ChoiceApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            options: ['Thing One', 'Thing two', 'Thing three']
+        };
+    }
     render () {
        const title = 'ChoiceApp';
        const subtitle = '!Randomizer at your will';
-       const options = ['Thing One', 'Thing two', 'thing four'];
-
+       
         return (
             <div>
                 <Header title={title} subtitle={subtitle} /> {/* add key value pairs */}
                 <Action />
-                <Options options={options}/>
+                <Options options={this.state.options}/>
                 <AddOption />
             </div>
         );
@@ -56,10 +61,16 @@ class Action extends React.Component {
 //add Remove All button
 //setup a handleRemoveAll > alert with message
 // setup onClick to fire the method 
-
+//integrate bind
 class Options extends React.Component {
+    //define constructor for remove all bind
+    constructor(props) {
+        super(props);
+        this.handleRemoveAll = this.handleRemoveAll.bind(this);
+    }
     handleRemoveAll(){  // set up event handler method 
-        alert('handleRemoveAll');
+       console.log(this.props.options);
+        // alert('handleRemoveAll');
     }
     render() {
         return (
