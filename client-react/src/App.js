@@ -4,7 +4,8 @@ import AddOption from './components/AddOption';
 import Option from './components/Option';
 import Action from './components/Action';
 import Header from './components/Header';
-
+import 'normalize.css/normalize.css';
+import './styles/styles.scss';
 
 //move rendering from const jsx into decisionApp class, nesting Header, Action, Options and AddOptions
 class ChoiceApp extends React.Component {
@@ -66,16 +67,20 @@ class ChoiceApp extends React.Component {
         return (
             <div>
                 <Header title={title} subtitle={subtitle} /> {/* add key value pairs */}
-                <Action hasOptions={this.state.options.length > 0}
-                    handlePick={this.handlePick}
-                />
-                <Options options={this.state.options}
-                    handleDeleteOptions={this.handleDeleteOptions}
-                />
-                <AddOption
-                    handleAddOption={this.handleAddOption} // call it down in the AddOption class 
+                <div className="container">
+                    <Action hasOptions={this.state.options.length > 0}
+                        handlePick={this.handlePick}
+                    />
+                    <Options options={this.state.options}
+                        handleDeleteOptions={this.handleDeleteOptions}
+                    />
+                    <AddOption
+                        handleAddOption={this.handleAddOption} // call it down in the AddOption class 
 
-                />
+                    />
+                
+                </div>
+                
             </div>
         );
     }
