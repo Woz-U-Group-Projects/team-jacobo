@@ -15,15 +15,18 @@ var ChoiceApp = function (_React$Component) {
     function ChoiceApp(props) {
         _classCallCheck(this, ChoiceApp);
 
+        //binding occurs here
         var _this = _possibleConstructorReturn(this, (ChoiceApp.__proto__ || Object.getPrototypeOf(ChoiceApp)).call(this, props));
 
         _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this); //bind to the current instance
+        _this.handlePick = _this.handlePick.bind(_this); // needs to call itself
         _this.state = {
             options: ['Thing One', 'Thing two', 'Thing three']
         };
         return _this;
     }
     // define method handleDeleteOption pass downed as a prop in Options
+    //parent 
 
 
     _createClass(ChoiceApp, [{
@@ -35,10 +38,24 @@ var ChoiceApp = function (_React$Component) {
                 };
             });
         }
+
+        // reveresed the data flow and allowed child to communicate with the parent by calling the method     
+        //randomizer math aka secret sauce
+
+    }, {
+        key: 'handlePick',
+        value: function handlePick() {
+            var randomNum = Math.floor(Math.random() * this.state.options.length);
+            var option = this.state.options[randomNum];
+            alert(option);
+        }
+        // pass handlePick to Action and set up onClick
+        // randomly pick an option and alert user
+
     }, {
         key: 'render',
         value: function render() {
-            var title = 'ChoiceApp';
+            var title = 'Decides for You App';
             var subtitle = '!Randomizer at your will';
 
             return React.createElement(
@@ -46,7 +63,9 @@ var ChoiceApp = function (_React$Component) {
                 null,
                 React.createElement(Header, { title: title, subtitle: subtitle }),
                 ' ',
-                React.createElement(Action, { hasOptions: this.state.options.length > 0 }),
+                React.createElement(Action, { hasOptions: this.state.options.length > 0,
+                    handlePick: this.handlePick
+                }),
                 React.createElement(Options, { options: this.state.options,
                     handleDeleteOptions: this.handleDeleteOptions
                 }),
@@ -107,11 +126,6 @@ var Action = function (_React$Component3) {
     }
 
     _createClass(Action, [{
-        key: 'handlePick',
-        value: function handlePick() {
-            alert('handlePick');
-        }
-    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -120,7 +134,7 @@ var Action = function (_React$Component3) {
                 React.createElement(
                     'button',
                     {
-                        onClick: this.handlePick,
+                        onClick: this.props.handlePick,
                         disabled: !this.props.hasOptions
                     },
                     'Tell me what to do!'

@@ -2,12 +2,15 @@
 class ChoiceApp extends React.Component {
     constructor(props) {
         super(props);
+        //binding occurs here
         this.handleDeleteOptions = this.handleDeleteOptions.bind(this); //bind to the current instance
+        this.handlePick = this.handlePick.bind(this); // needs to call itself
         this.state = {
             options: ['Thing One', 'Thing two', 'Thing three']
         };
     }
     // define method handleDeleteOption pass downed as a prop in Options
+    //parent 
     handleDeleteOptions(){
         this.setState(() => {
             return {
@@ -15,14 +18,26 @@ class ChoiceApp extends React.Component {
             };
         });
     }
+
+// reveresed the data flow and allowed child to communicate with the parent by calling the method     
+//randomizer math aka secret sauce
+handlePick() {
+    const randomNum = Math.floor(Math.random() * this.state.options.length);
+    const option = this.state.options[randomNum];
+    alert(option);
+}
+// pass handlePick to Action and set up onClick
+// randomly pick an option and alert user
     render () {
-       const title = 'ChoiceApp';
+       const title = 'Decides for You App';
        const subtitle = '!Randomizer at your will';
        
         return (
             <div>
                 <Header title={title} subtitle={subtitle} /> {/* add key value pairs */}
-                <Action hasOptions={this.state.options.length > 0} />
+                <Action hasOptions={this.state.options.length > 0}
+                handlePick={this.handlePick}
+                />
                 <Options options={this.state.options}
                 handleDeleteOptions={this.handleDeleteOptions}
                 />
@@ -51,14 +66,11 @@ class Header extends React.Component {
 
 // create a class called Action for the button effects that extends React.Component 
 class Action extends React.Component {
-    handlePick() {
-        alert('handlePick');
-    }
     render() {
         return (
             <div>
                 <button 
-                onClick={this.handlePick}
+                onClick={this.props.handlePick}
                 disabled={!this.props.hasOptions}
                 >
                 Tell me what to do!
