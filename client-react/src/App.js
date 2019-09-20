@@ -1,3 +1,11 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import AddOption from './components/AddOption';
+import Option from './components/Option';
+import Action from './components/Action';
+import Header from './components/Header';
+
+
 //move rendering from const jsx into decisionApp class, nesting Header, Action, Options and AddOptions
 class ChoiceApp extends React.Component {
     constructor(props) {
@@ -10,101 +18,84 @@ class ChoiceApp extends React.Component {
             options: [] //renders an empty list
         };
     }
-// define method handleDeleteOption pass downed as a prop in Options
-//parent 
-handleDeleteOptions(){
-    this.setState(() => {
-    return {
-        options: []
-        };
-    });
-}
+    // define method handleDeleteOption pass downed as a prop in Options
+    //parent 
+    handleDeleteOptions() {
+        this.setState(() => {
+            return {
+                options: []
+            };
+        });
+    }
 
-// reveresed the data flow and allowed child to communicate with the parent by calling the method     
-//randomizer math aka secret sauce
-handlePick() {
-    const randomNum = Math.floor(Math.random() * this.state.options.length);
-    const option = this.state.options[randomNum];
-    alert(option);
-}
-
-
-handleAddOption(option) {
-    // adding some conditional logic
-    if (!option) { //will only run if there is an empty string
-        return 'Enter a valid value to add item';
-    } else if (this.state.options.indexOf(option) > -1) {
-        return 'This option already exists';
-    } 
+    // reveresed the data flow and allowed child to communicate with the parent by calling the method     
+    //randomizer math aka secret sauce
+    handlePick() {
+        const randomNum = Math.floor(Math.random() * this.state.options.length);
+        const option = this.state.options[randomNum];
+        alert(option);
+    }
 
 
-    this.setState((prevState) => {
-        return {
-            options: prevState.options.concat(option) // concat 
-        };
-    }); 
-    // pass in updater function
-    //console.log(option); //bind above before passing it down
-}
-// pass handlePick to Action and set up onClick
-// randomly pick an option and alert user
-// found a way to make child communicate with parent, props are usually 1 way street 
-// this was fixed by passing functions like handlePick and handleDeleteOptions down to the children
-// the children can then call those functions which allows to reverse data flow  
-    render () {
-       const title = 'Decides for You App';
-       const subtitle = '!Randomizer at your will';
-       
+    handleAddOption(option) {
+        // adding some conditional logic
+        if (!option) { //will only run if there is an empty string
+            return 'Enter a valid value to add item';
+        } else if (this.state.options.indexOf(option) > -1) {
+            return 'This option already exists';
+        }
+
+
+        this.setState((prevState) => {
+            return {
+                options: prevState.options.concat(option) // concat 
+            };
+        });
+        // pass in updater function
+        //console.log(option); //bind above before passing it down
+    }
+    // pass handlePick to Action and set up onClick
+    // randomly pick an option and alert user
+    // found a way to make child communicate with parent, props are usually 1 way street 
+    // this was fixed by passing functions like handlePick and handleDeleteOptions down to the children
+    // the children can then call those functions which allows to reverse data flow  
+    render() {
+        const title = 'Decides for You App';
+        const subtitle = 'Cannot decide, decide for me please';
+
         return (
             <div>
                 <Header title={title} subtitle={subtitle} /> {/* add key value pairs */}
                 <Action hasOptions={this.state.options.length > 0}
-                handlePick={this.handlePick}
+                    handlePick={this.handlePick}
                 />
                 <Options options={this.state.options}
-                handleDeleteOptions={this.handleDeleteOptions}
+                    handleDeleteOptions={this.handleDeleteOptions}
                 />
-                <AddOption 
-                handleAddOption={this.handleAddOption} // call it down in the AddOption class 
-                
+                <AddOption
+                    handleAddOption={this.handleAddOption} // call it down in the AddOption class 
+
                 />
             </div>
         );
     }
 }
 
-
-
-// building randomizer app using React components 
-class Header extends React.Component {
-    render() {
-
-        return (
-            <div>
-                <h1>{this.props.title}</h1>
-                <h2>{this.props.subtitle}</h2>
-        
-            </div>
-
-        );
-    }
-}
-
-// create a class called Action for the button effects that extends React.Component 
-class Action extends React.Component {
+class Options extends React.Component {
     render() {
         return (
             <div>
-                <button 
-                onClick={this.props.handlePick}
-                disabled={!this.props.hasOptions}
-                >
-                Tell me what to do!
-                </button>
+                <button onClick={this.props.handleDeleteOptions}>Remove All</button>
+                {
+                    this.props.options.map((option) => <Option key={option} optionText={option} />) //?
+                }
             </div>
         );
     }
 }
+
+
+
 
 //setup an options prop for Options component
 //render the length of the array 
@@ -116,71 +107,10 @@ class Action extends React.Component {
 //setup a handleRemoveAll > alert with message
 // setup onClick to fire the method 
 //integrate bind
-class Options extends React.Component {
-    render() {
-        return (
-            <div>
-                <button onClick={this.props.handleDeleteOptions}>Remove All</button>
-                {
-                this.props.options.map((option) => <Option key={option} optionText={option}/>) //?
-                }
-            </div>
-        );
-    }   
-}
 
-// Option -> Option component here
-class Option extends React.Component {
-    render() {
-        return (
-            <div>
-            {this.props.optionText}
-            
-            </div>
-        );
-    }
-}
 
-// setup the form with text input and submit button 
-// wire up onSubmit
-// define method to wire up (handleAddOption > fetch the value typed > if value, then alert)
 
-// add AddOptions > AddOption component here
-class AddOption extends React.Component {
-    //set up constructor function
-    constructor(props) {
-        super(props);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.state = {
-            error: undefined
-        };
-    }
-    handleAddOption(e) { // this behavior shouldn't live in the parent, AddOption also built in the component when form gets submitted
-        e.preventDefault();
-// possible error 
-        const option = e.target.elements.option.value.trim(); //data extracted here
-        const error = this.props.handleAddOption(option);
-        // add component state
-        
-        this.setState(() => {
-            return { error };
-        });
-    }
-// end of possible error
 
-    render () {
-        return (
-            <div>
-                {this.state.error && <p>{this.state.error}</p>}
-                <form onSubmit={this.handleAddOption}>
-                    <input type="text" name="option" />
-                    <button>Add Option</button>
-                </form>
-            </div>
-
-        );
-    }
-}
 
 
 //add another component named jsx to render HTML from Header and Action classes
@@ -193,7 +123,7 @@ const jsx = (
         <Options /> render new Options class here 
     </div>
 );
-*/ 
+*/
 
 
 // forgot to add ReactDOM
