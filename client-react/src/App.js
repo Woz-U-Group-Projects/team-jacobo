@@ -5,6 +5,7 @@ class ChoiceApp extends React.Component {
         //binding occurs here
         this.handleDeleteOptions = this.handleDeleteOptions.bind(this); //bind to the current instance
         this.handlePick = this.handlePick.bind(this); // needs to call itself
+        this.handleAddOption = this.handleAddOption.bind(this); // passes it down to AddOption inside children
         this.state = {
             options: ['Thing One', 'Thing two', 'Thing three']
         };
@@ -26,6 +27,15 @@ handlePick() {
     const option = this.state.options[randomNum];
     alert(option);
 }
+handleAddOption(option) {
+    this.setState((prevState) => {
+        return {
+            options: prevState.options.concat([option]) // concat 
+        };
+    }); 
+    // pass in updater function
+    //console.log(option); //bind above before passing it down
+}
 // pass handlePick to Action and set up onClick
 // randomly pick an option and alert user
 // found a way to make child communicate with parent, props are usually 1 way street 
@@ -44,7 +54,10 @@ handlePick() {
                 <Options options={this.state.options}
                 handleDeleteOptions={this.handleDeleteOptions}
                 />
-                <AddOption />
+                <AddOption 
+                handleAddOption={this.handleAddOption} // call it down in the AddOption class 
+                
+                />
             </div>
         );
     }
@@ -124,13 +137,18 @@ class Option extends React.Component {
 
 // add AddOptions > AddOption component here
 class AddOption extends React.Component {
-    handleAddOption(e) {
+    //set up constructor function
+    constructor(props) {
+        super(props);
+        this.handleAddOption = this.handleAddOption.bind(this);
+    }
+    handleAddOption(e) { // this behavior shouldn't live in the parent, AddOption also built in the component when form gets submitted
         e.preventDefault();
 
-        const option = e.target.elements.option.value.trim();
+        const option = e.target.elements.option.value.trim(); //data extracted here
 
         if (option) {
-            alert(option);
+            this.props.handleAddOption(option); // pass data in with option from the parent, will be manipulated here, doesn't manipulate the state
         }
     }
     render () {

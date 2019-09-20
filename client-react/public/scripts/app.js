@@ -20,6 +20,7 @@ var ChoiceApp = function (_React$Component) {
 
         _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this); //bind to the current instance
         _this.handlePick = _this.handlePick.bind(_this); // needs to call itself
+        _this.handleAddOption = _this.handleAddOption.bind(_this); // passes it down to AddOption inside children
         _this.state = {
             options: ['Thing One', 'Thing two', 'Thing three']
         };
@@ -49,6 +50,17 @@ var ChoiceApp = function (_React$Component) {
             var option = this.state.options[randomNum];
             alert(option);
         }
+    }, {
+        key: 'handleAddOption',
+        value: function handleAddOption(option) {
+            this.setState(function (prevState) {
+                return {
+                    options: prevState.options.concat([option]) // concat 
+                };
+            });
+            // pass in updater function
+            //console.log(option); //bind above before passing it down
+        }
         // pass handlePick to Action and set up onClick
         // randomly pick an option and alert user
         // found a way to make child communicate with parent, props are usually 1 way street 
@@ -72,7 +84,10 @@ var ChoiceApp = function (_React$Component) {
                 React.createElement(Options, { options: this.state.options,
                     handleDeleteOptions: this.handleDeleteOptions
                 }),
-                React.createElement(AddOption, null)
+                React.createElement(AddOption, {
+                    handleAddOption: this.handleAddOption // call it down in the AddOption class 
+
+                })
             );
         }
     }]);
@@ -227,21 +242,26 @@ var Option = function (_React$Component5) {
 var AddOption = function (_React$Component6) {
     _inherits(AddOption, _React$Component6);
 
-    function AddOption() {
+    //set up constructor function
+    function AddOption(props) {
         _classCallCheck(this, AddOption);
 
-        return _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).apply(this, arguments));
+        var _this6 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
+
+        _this6.handleAddOption = _this6.handleAddOption.bind(_this6);
+        return _this6;
     }
 
     _createClass(AddOption, [{
         key: 'handleAddOption',
         value: function handleAddOption(e) {
+            // this behavior shouldn't live in the parent, AddOption also built in the component when form gets submitted
             e.preventDefault();
 
-            var option = e.target.elements.option.value.trim();
+            var option = e.target.elements.option.value.trim(); //data extracted here
 
             if (option) {
-                alert(option);
+                this.props.handleAddOption(option); // pass data in with option from the parent, will be manipulated here, doesn't manipulate the state
             }
         }
     }, {
