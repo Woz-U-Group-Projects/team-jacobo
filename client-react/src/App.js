@@ -7,18 +7,18 @@ class ChoiceApp extends React.Component {
         this.handlePick = this.handlePick.bind(this); // needs to call itself
         this.handleAddOption = this.handleAddOption.bind(this); // passes it down to AddOption inside children
         this.state = {
-            options: ['Thing One', 'Thing two', 'Thing three']
+            options: [] //renders an empty list
         };
     }
-    // define method handleDeleteOption pass downed as a prop in Options
-    //parent 
-    handleDeleteOptions(){
-        this.setState(() => {
-            return {
-                options: []
-            };
-        });
-    }
+// define method handleDeleteOption pass downed as a prop in Options
+//parent 
+handleDeleteOptions(){
+    this.setState(() => {
+    return {
+        options: []
+        };
+    });
+}
 
 // reveresed the data flow and allowed child to communicate with the parent by calling the method     
 //randomizer math aka secret sauce
@@ -27,10 +27,20 @@ handlePick() {
     const option = this.state.options[randomNum];
     alert(option);
 }
+
+
 handleAddOption(option) {
+    // adding some conditional logic
+    if (!option) { //will only run if there is an empty string
+        return 'Enter a valid value to add item';
+    } else if (this.state.options.indexOf(option) > -1) {
+        return 'This option already exists';
+    } 
+
+
     this.setState((prevState) => {
         return {
-            options: prevState.options.concat([option]) // concat 
+            options: prevState.options.concat(option) // concat 
         };
     }); 
     // pass in updater function
@@ -112,7 +122,7 @@ class Options extends React.Component {
             <div>
                 <button onClick={this.props.handleDeleteOptions}>Remove All</button>
                 {
-                this.props.options.map((option) => <Option key={option} optionText={option}/>)
+                this.props.options.map((option) => <Option key={option} optionText={option}/>) //?
                 }
             </div>
         );
@@ -141,19 +151,27 @@ class AddOption extends React.Component {
     constructor(props) {
         super(props);
         this.handleAddOption = this.handleAddOption.bind(this);
+        this.state = {
+            error: undefined
+        };
     }
     handleAddOption(e) { // this behavior shouldn't live in the parent, AddOption also built in the component when form gets submitted
         e.preventDefault();
-
+// possible error 
         const option = e.target.elements.option.value.trim(); //data extracted here
-
-        if (option) {
-            this.props.handleAddOption(option); // pass data in with option from the parent, will be manipulated here, doesn't manipulate the state
-        }
+        const error = this.props.handleAddOption(option);
+        // add component state
+        
+        this.setState(() => {
+            return { error };
+        });
     }
+// end of possible error
+
     render () {
         return (
             <div>
+                {this.state.error && <p>{this.state.error}</p>}
                 <form onSubmit={this.handleAddOption}>
                     <input type="text" name="option" />
                     <button>Add Option</button>
