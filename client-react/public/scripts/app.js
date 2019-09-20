@@ -21,10 +21,15 @@ var ChoiceApp = function (_React$Component) {
     _createClass(ChoiceApp, [{
         key: 'render',
         value: function render() {
+            var title = 'ChoiceApp';
+            var subtitle = '!!!Randomizer at your will';
+            var options = ['Thing One', 'Thing two', 'thing four'];
+
             return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, null),
+                React.createElement(Header, { title: title, subtitle: subtitle }),
+                ' ',
                 React.createElement(Action, null),
                 React.createElement(Options, null),
                 React.createElement(AddOption, null)
@@ -50,18 +55,19 @@ var Header = function (_React$Component2) {
     _createClass(Header, [{
         key: 'render',
         value: function render() {
+
             return React.createElement(
                 'div',
                 null,
                 React.createElement(
                     'h1',
                     null,
-                    'Make me decide'
+                    this.props.title
                 ),
                 React.createElement(
                     'h2',
                     null,
-                    'Randomizer at your will'
+                    this.props.subtitle
                 )
             );
         }
@@ -100,6 +106,9 @@ var Action = function (_React$Component3) {
     return Action;
 }(React.Component);
 
+//setup an options prop for Options component
+//render the length of the array 
+
 // add Options -> Options components here
 
 
@@ -118,7 +127,7 @@ var Options = function (_React$Component4) {
             return React.createElement(
                 'div',
                 null,
-                'Options component here'
+                'Options components here'
             );
         }
     }]);
@@ -126,11 +135,37 @@ var Options = function (_React$Component4) {
     return Options;
 }(React.Component);
 
+// Option -> Option component here
+
+
+var Option = function (_React$Component5) {
+    _inherits(Option, _React$Component5);
+
+    function Option() {
+        _classCallCheck(this, Option);
+
+        return _possibleConstructorReturn(this, (Option.__proto__ || Object.getPrototypeOf(Option)).apply(this, arguments));
+    }
+
+    _createClass(Option, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                'Option component here'
+            );
+        }
+    }]);
+
+    return Option;
+}(React.Component);
+
 // add AddOptions > AddOption component here
 
 
-var AddOption = function (_React$Component5) {
-    _inherits(AddOption, _React$Component5);
+var AddOption = function (_React$Component6) {
+    _inherits(AddOption, _React$Component6);
 
     function AddOption() {
         _classCallCheck(this, AddOption);
@@ -169,3 +204,17 @@ const jsx = (
 
 
 ReactDOM.render(React.createElement(ChoiceApp, null), document.getElementById('app'));
+
+// Notes:
+// Run Babel in terminal:
+// babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
+// Run live-server app instead of npm start everytime:
+// live-server public
+
+// git branch
+// git fetch
+// git checkout addOptions/dev
+// git status
+// git add .
+// git commit -m "type anything"
+// git push -u origin *addOptions or dev*

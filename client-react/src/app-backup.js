@@ -4,7 +4,7 @@ class ChoiceApp extends React.Component {
        const title = 'ChoiceApp';
        const subtitle = '!!!Randomizer at your will';
        const options = ['Thing One', 'Thing two', 'thing four'];
-
+       
         return (
             <div>
                 <Header title={title} subtitle={subtitle} /> {/* add key value pairs */}
@@ -44,7 +44,7 @@ class Action extends React.Component {
     }
 }
 
-//setup an options prop for Options component
+//setup options prop for Options component
 //render the length of the array 
 
 // add Options -> Options components here
