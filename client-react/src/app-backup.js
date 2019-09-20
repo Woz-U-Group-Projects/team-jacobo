@@ -1,15 +1,15 @@
 //move rendering from const jsx into decisionApp class, nesting Header, Action, Options and AddOptions
 class ChoiceApp extends React.Component {
-    render () {
-       const title = 'ChoiceApp';
-       const subtitle = '!!!Randomizer at your will';
-       const options = ['Thing One', 'Thing two', 'thing four'];
-       
+    render() {
+        const title = 'ChoiceApp';
+        const subtitle = '!Randomizer at your will';
+        const options = ['Thing One', 'Thing two', 'thing four'];
+
         return (
             <div>
                 <Header title={title} subtitle={subtitle} /> {/* add key value pairs */}
                 <Action />
-                <Options />
+                <Options options={options} />
                 <AddOption />
             </div>
         );
@@ -26,7 +26,7 @@ class Header extends React.Component {
             <div>
                 <h1>{this.props.title}</h1>
                 <h2>{this.props.subtitle}</h2>
-        
+
             </div>
 
         );
@@ -35,28 +35,42 @@ class Header extends React.Component {
 
 // create a class called Action for the button effects that extends React.Component 
 class Action extends React.Component {
+    handlePick() {
+        alert('handlePick');
+    }
     render() {
         return (
             <div>
-                <button>Tell me what to do!</button>
+                <button onClick={this.handlePick}>Tell me what to do!</button>
             </div>
         );
     }
 }
 
-//setup options prop for Options component
+//setup an options prop for Options component
 //render the length of the array 
 
+// Render a new p tag for each option (set text, set key)
+
 // add Options -> Options components here
+//add Remove All button
+//setup a handleRemoveAll > alert with message
+// setup onClick to fire the method 
+
 class Options extends React.Component {
+    handleRemoveAll() {  // set up event handler method 
+        alert('handleRemoveAll');
+    }
     render() {
         return (
             <div>
-             Options components here 
-         
+                <button onClick={this.handleRemoveAll}>Remove All</button>
+                {
+                    this.props.options.map((option) => <Option key={option} optionText={option} />)
+                }
             </div>
         );
-    }   
+    }
 }
 
 // Option -> Option component here
@@ -64,20 +78,35 @@ class Option extends React.Component {
     render() {
         return (
             <div>
-            Option component here
-            
+                {this.props.optionText}
+
             </div>
         );
     }
 }
 
+// setup the form with text input and submit button 
+// wire up onSubmit
+// define method to wire up (handleAddOption > fetch the value typed > if value, then alert)
 
 // add AddOptions > AddOption component here
 class AddOption extends React.Component {
-    render () {
+    handleAddOption(e) {
+        e.preventDefault();
+
+        const option = e.target.elements.option.value.trim();
+
+        if (option) {
+            alert(option);
+        }
+    }
+    render() {
         return (
             <div>
-                AddOptions component here
+                <form onSubmit={this.handleAddOption}>
+                    <input type="text" name="option" />
+                    <button>Add Option</button>
+                </form>
             </div>
 
         );
@@ -95,7 +124,7 @@ const jsx = (
         <Options /> render new Options class here 
     </div>
 );
-*/ 
+*/
 
 
 // forgot to add ReactDOM
