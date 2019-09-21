@@ -10,6 +10,7 @@
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1",
     "css-loader": "0.28.4",
+    "firebase": "4.2.0",
     "live-server": "^1.2.1",
     "node-sass": "^4.12.0",
     "normalize.css": "7.0.0",
@@ -23,13 +24,12 @@
     "webpack-dev-server": "2.5.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/server.js",
     "build": "webpack",
     "dev-server": "webpack-dev-server",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start": "node server/server.js",
-    "heroku-postbuild": "yarn run build: prod" 
+    "heroku-postbuild": "yarn run build: prod"
   },
   "eslintConfig": {
     "extends": "react-app"

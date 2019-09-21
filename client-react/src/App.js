@@ -6,6 +6,7 @@ import Action from './components/Action';
 import Header from './components/Header';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
+import './firebase/firebase';
 
 //move rendering from const jsx into decisionApp class, nesting Header, Action, Options and AddOptions
 class ChoiceApp extends React.Component {
