@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
 
+//configuration object
 const config = {
     apiKey: "AIzaSyC6sq2OqcOlQL31aK-HHhpT9GGCpDskxrg",
     authDomain: "decideify.firebaseapp.com",
@@ -13,7 +14,8 @@ const config = {
   // Initialize Firebase
 firebase.initializeApp(config);
 
-  firebase.database().ref().set({
+// tests connection to backend NoSQL database on Google Firebase Cloud
+firebase.database().ref().set({
     name: 'Alex Jacobo'
   });
 
