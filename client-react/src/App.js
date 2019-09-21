@@ -41,7 +41,7 @@ class ChoiceApp extends React.Component {
     handleAddOption(option) {
         // adding some conditional logic
         if (!option) { //will only run if there is an empty string
-            return 'Enter a valid value to add item';
+            return 'Please add an option to get started';
         } else if (this.state.options.indexOf(option) > -1) {
             return 'This option already exists';
         }
@@ -61,8 +61,8 @@ class ChoiceApp extends React.Component {
     // this was fixed by passing functions like handlePick and handleDeleteOptions down to the children
     // the children can then call those functions which allows to reverse data flow  
     render() {
-        const title = 'Decides for You App';
-        const subtitle = 'Cannot decide, decide for me please';
+        const title = 'Decide-ify';
+        const subtitle = 'Letting apps decide my life since 2019';
 
         return (
             <div>
